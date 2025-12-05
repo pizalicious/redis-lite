@@ -1,0 +1,28 @@
+# 編譯產物
+*.o
+*.out
+redis-lite
+server/redis-lite
+
+# 除錯檔案
+*.dSYM/
+core
+*.core
+
+# IDE 設定
+.vscode/
+.idea/
+*.swp
+
+# 測試產生的資料
+*.log
+test_data/
+
+# Python
+__pycache__/
+*.pyc
+client/*.pyc
+
+# 系統檔案
+.DS_Store
+Thumbs.db
