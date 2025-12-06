@@ -1,21 +1,26 @@
-# 編譯產物
+# ==========================================
+#           Redis-lite .gitignore
+# ==========================================
+
+# ===== C++ 編譯產物 =====
 *.o
 *.out
 *.exe
 *.so
 *.a
+*.dylib
 redis-lite
 server/redis-lite
 server/*.o
-client/*.o
 
-# 除錯檔案
+# ===== 除錯檔案 =====
 *.dSYM/
 core
 *.core
 vgcore.*
 
-# IDE 設定
+# ===== IDE 與編輯器 =====
+# VS Code - 保留專案設定，忽略個人設定
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -25,44 +30,34 @@ vgcore.*
 
 # 其他 IDE
 .idea/
-*.swp
-*.swo
-*~
 .project
 .cproject
 .settings/
 
-# 測試產生的資料
-*.log
-test_data/
-dump.rdb
-*.rdb
-
-# 系統檔案
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# ===== 暫存檔 =====
-*.tmp
-*.temp
+# 編輯器暫存檔
+*.swp
+*.swo
+*~
 *.bak
 *.backup
 
 # ===== Python =====
-# Virtual Environment
+# 虛擬環境
 venv/
 env/
 ENV/
 .venv
+env.bak/
+venv.bak/
 
-# Python cache
+# Python 快取
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
+*.pyo
+*.pyd
 
-# Distribution / packaging
+# 打包與發布
 .Python
 build/
 develop-eggs/
@@ -79,18 +74,71 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# PyTest
+# 測試與覆蓋率
 .pytest_cache/
 .coverage
+.coverage.*
 htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
 
-# MyPy
+# 型別檢查
 .mypy_cache/
 .dmypy.json
 dmypy.json
+.pyre/
+.pytype/
 
-# 測試產生的資料
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# 環境變數
+.env
+.env.local
+
+# ===== 測試與效能分析 =====
+*.log
+test_data/
 benchmark_results/
+
+# Redis 資料檔案
+dump.rdb
+*.rdb
+appendonly.aof
+
+# ===== 系統檔案 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.temp
+
+# ===== 文件與媒體 (測試產生) =====
 *.png
 *.jpg
+*.jpeg
+*.gif
+*.svg
+!docs/**/*.png
+!docs/**/*.jpg
+
+# ===== 其他 =====
+# 編譯資料庫
+compile_commands.json
+
+# 記憶體檢查報告
+valgrind-out.txt
+*.memcheck
+
+# CMake (如果未來使用)
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
