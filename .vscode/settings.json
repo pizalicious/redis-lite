@@ -6,6 +6,31 @@
     "C_Cpp.default.compilerPath": "/usr/bin/g++",
     "C_Cpp.errorSquiggles": "enabled",
     "C_Cpp.autocomplete": "default",
+    // ===== Python 設定 =====
+    "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.languageServer": "Pylance",
+    // Python 格式化
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    // Ruff Linter (快速檢查)
+    "ruff.enable": true,
+    "ruff.lint.enable": true,
+    "ruff.organizeImports": true,
+    // Python 測試
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    // 型別檢查
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
     // ===== 編輯器外觀 =====
     "editor.fontSize": 14,
     "editor.tabSize": 4,
@@ -18,7 +43,7 @@
     "editor.minimap.enabled": true,
     "editor.renderWhitespace": "boundary",
     "editor.bracketPairColorization.enabled": true,
-    "editor.guides.bracketPairs": true,
+    // "editor.guides.bracketPairs": true,
     // ===== 檔案設定 =====
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
@@ -27,22 +52,32 @@
     "files.exclude": {
         "**/*.o": true,
         "**/*.out": true,
-        "**/redis-lite": true
+        "**/redis-lite": true,
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/venv": false // 顯示 venv 但不搜尋
     },
-    // ===== Code Runner 設定 (一鍵執行) =====
+    "files.watcherExclude": {
+        "**/venv/**": true
+    },
+    // ===== Code Runner 設定 (C++ & Python) =====
     "code-runner.runInTerminal": true,
     "code-runner.saveFileBeforeRun": true,
     "code-runner.executorMap": {
-        "cpp": "cd $dir && g++ -std=c++17 -Wall -Wextra -g $fileName -o $fileNameWithoutExt && ./$fileNameWithoutExt"
+        "cpp": "cd $dir && g++ -std=c++17 -Wall -Wextra -g $fileName -o $fileNameWithoutExt && ./$fileNameWithoutExt",
+        "python": "cd $dir && source ../venv/bin/activate && python $fileName"
     },
     // ===== Terminal 設定 =====
     "terminal.integrated.defaultProfile.linux": "bash",
     "terminal.integrated.fontSize": 13,
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "${workspaceFolder}"
+    },
     // ===== Git 設定 =====
     "git.autofetch": true,
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
-    // Error Lens 設定
+    // ===== Error Lens 設定 =====
     "errorLens.enabledDiagnosticLevels": [
         "error",
         "warning",
@@ -52,7 +87,7 @@
     "errorLens.fontWeight": "normal",
     "errorLens.delay": 500, // 延遲 0.5 秒顯示
     "errorLens.excludeBySource": [],
-    // GitLens 設定
+    // ===== GitLens 設定 =====
     "gitlens.currentLine.enabled": true,
     "gitlens.codeLens.enabled": true,
     "gitlens.hovers.currentLine.over": "line",

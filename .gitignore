@@ -38,16 +38,6 @@ test_data/
 dump.rdb
 *.rdb
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-venv/
-env/
-*.egg-info/
-
 # 系統檔案
 .DS_Store
 Thumbs.db
@@ -58,3 +48,49 @@ desktop.ini
 *.temp
 *.bak
 *.backup
+
+# ===== Python =====
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyTest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# 測試產生的資料
+benchmark_results/
+*.png
+*.jpg

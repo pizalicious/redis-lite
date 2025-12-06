@@ -1,6 +1,7 @@
 {
     "version": "2.0.0",
     "tasks": [
+        // ===== C++ Tasks =====
         {
             "label": "Build Redis-lite Server",
             "type": "shell",
@@ -26,25 +27,44 @@
                 "panel": "new"
             }
         },
+        // ===== Python Tasks =====
         {
-            "label": "Run Server",
+            "label": "Run Python Client",
             "type": "shell",
-            "command": "${workspaceFolder}/server/redis-lite",
-            "dependsOn": "Build Redis-lite Server",
+            "command": "source ${workspaceFolder}/venv/bin/activate && python ${workspaceFolder}/client/redis_client.py",
             "group": {
                 "kind": "test",
-                "isDefault": true
-            }
+                "isDefault": false
+            },
+            "problemMatcher": []
         },
         {
-            "label": "Clean Build",
+            "label": "Run Python Tests",
             "type": "shell",
-            "command": "rm",
-            "args": [
-                "-f",
-                "${workspaceFolder}/server/*.o",
-                "${workspaceFolder}/server/redis-lite"
-            ]
-        }
+            "command": "source ${workspaceFolder}/venv/bin/activate && pytest tests/ -v",
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Benchmark",
+            "type": "shell",
+            "command": "source ${workspaceFolder}/venv/bin/activate && python ${workspaceFolder}/client/benchmark.py",
+            "problemMatcher": []
+        },
+        {
+            "label": "Format Python Code",
+            "type": "shell",
+            "command": "source ${workspaceFolder}/venv/bin/activate && black client/ tests/",
+            "problemMatcher": []
+        },
+        {
+            "label": "Lint Python Code",
+            "type": "shell",
+            "command": "source ${workspaceFolder}/venv/bin/activate && ruff check client/ tests/",
+            "problemMatcher": []
+        },
     ]
 }
