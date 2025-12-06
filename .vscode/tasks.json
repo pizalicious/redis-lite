@@ -1,0 +1,50 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Redis-lite Server",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-g",
+                "${workspaceFolder}/server/main.cpp",
+                "-o",
+                "${workspaceFolder}/server/redis-lite"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Run Server",
+            "type": "shell",
+            "command": "${workspaceFolder}/server/redis-lite",
+            "dependsOn": "Build Redis-lite Server",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Clean Build",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-f",
+                "${workspaceFolder}/server/*.o",
+                "${workspaceFolder}/server/redis-lite"
+            ]
+        }
+    ]
+}

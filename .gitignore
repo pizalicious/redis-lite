@@ -1,28 +1,60 @@
 # 編譯產物
 *.o
 *.out
+*.exe
+*.so
+*.a
 redis-lite
 server/redis-lite
+server/*.o
+client/*.o
 
 # 除錯檔案
 *.dSYM/
 core
 *.core
+vgcore.*
 
 # IDE 設定
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/c_cpp_properties.json
+
+# 其他 IDE
 .idea/
 *.swp
+*.swo
+*~
+.project
+.cproject
+.settings/
 
 # 測試產生的資料
 *.log
 test_data/
+dump.rdb
+*.rdb
 
 # Python
 __pycache__/
-*.pyc
-client/*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
 
 # 系統檔案
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# ===== 暫存檔 =====
+*.tmp
+*.temp
+*.bak
+*.backup

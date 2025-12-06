@@ -1,0 +1,62 @@
+{
+    // ===== C/C++ 設定 =====
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.cStandard": "c11",
+    "C_Cpp.default.intelliSenseMode": "linux-gcc-x64",
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.autocomplete": "default",
+    // ===== 編輯器外觀 =====
+    "editor.fontSize": 14,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "editor.minimap.enabled": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    // ===== 檔案設定 =====
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.encoding": "utf8",
+    "files.eol": "\n",
+    "files.exclude": {
+        "**/*.o": true,
+        "**/*.out": true,
+        "**/redis-lite": true
+    },
+    // ===== Code Runner 設定 (一鍵執行) =====
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ -std=c++17 -Wall -Wextra -g $fileName -o $fileNameWithoutExt && ./$fileNameWithoutExt"
+    },
+    // ===== Terminal 設定 =====
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.fontSize": 13,
+    // ===== Git 設定 =====
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    // Error Lens 設定
+    "errorLens.enabledDiagnosticLevels": [
+        "error",
+        "warning",
+        "info"
+    ],
+    "errorLens.fontSize": "13",
+    "errorLens.fontWeight": "normal",
+    "errorLens.delay": 500, // 延遲 0.5 秒顯示
+    "errorLens.excludeBySource": [],
+    // GitLens 設定
+    "gitlens.currentLine.enabled": true,
+    "gitlens.codeLens.enabled": true,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.blame.format": "${author}, ${date}",
+    "gitlens.defaultDateFormat": "YYYY-MM-DD",
+    "gitlens.defaultDateShortFormat": "MM-DD",
+}
