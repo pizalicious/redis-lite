@@ -21,56 +21,59 @@ int main()
     char buffer[1024] = {0};
     const char *hello = "Server says: Hello from C++!";
 
-    // 建立 socket 檔案描述符
+    // 1. 建立 Socket 檔案描述符 (File Descriptor)
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
     {
-        std::cerr << "Socket creation error" << std::endl;
+        perror("socket failed");
         return -1;
     }
 
-    // 強制綁定端口
-    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)))
+    // 設定 Socket 選項，讓它可以重複使用 Port (避免重開時報錯 "Address already in use")
+    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)))
     {
-        std::cerr << "Set socket options error" << std::endl;
+        perror("setsockopt");
         return -1;
     }
 
+    // 2. 設定 IP 與 Port
     address.sin_family = AF_INET;
-    address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(PORT);
+    address.sin_addr.s_addr = INADDR_ANY; // 監聽本機所有 IP
+    address.sin_port = htons(PORT);       // 設定 Port 8080
 
-    // 綁定 socket 到端口
+    // 3. Bind: 將 Socket 綁定到指定的 IP 和 Port
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0)
     {
-        std::cerr << "Bind failed" << std::endl;
+        perror("bind failed");
         return -1;
     }
 
-    // 開始監聽
+    // 4. Listen: 開始監聽連線，等待佇列長度設為 3
     if (listen(server_fd, 3) < 0)
     {
-        std::cerr << "Listen failed" << std::endl;
+        perror("listen");
         return -1;
     }
 
-    std::cout << "Server is listening on port " << PORT << std::endl;
+    std::cout << "Waiting for connections on port " << PORT << "..." << std::endl;
 
-    // 接受連接
+    // 5. Accept: 阻塞 (Block) 直到有 Client 連進來
     if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
     {
-        std::cerr << "Accept failed" << std::endl;
+        perror("accept");
         return -1;
     }
 
-    // 讀取資料
-    read(new_socket, buffer, 1024);
-    std::cout << "Message from client: " << buffer << std::endl;
+    std::cout << "Client connected!" << std::endl;
 
-    // 發送回應
+    // 6. Read: 讀取 Client 傳來的資料
+    int valread = read(new_socket, buffer, 1024);
+    std::cout << "Received: " << buffer << std::endl;
+
+    // 7. Send: 回傳資料給 Client
     send(new_socket, hello, strlen(hello), 0);
-    std::cout << "Hello message sent" << std::endl;
+    std::cout << "Hello message sent\n";
 
-    // 關閉 socket
+    // 關閉連線
     close(new_socket);
     close(server_fd);
     return 0;
